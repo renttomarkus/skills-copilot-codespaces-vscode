@@ -76,4 +76,13 @@ app.put('/comment/:id', (req, res) => {
       const comments = JSON.parse(data);
       const comment = comments.find((c) => c.id === parseInt(req.params.id));
       comment.body = req.body.body;
-      fs.writeFile('comments.json', JSON.stringify(comments), (err) =>
+            fs.writeFile('comments.json', JSON.stringify(comments), (err) => {
+              if (err) {
+                res.send('Error writing file');
+              } else {
+                res.send('Comment updated successfully');
+              }
+            });
+          }
+        });
+      });
